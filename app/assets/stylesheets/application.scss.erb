@@ -1,0 +1,136 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+body { 
+    padding-top: 70px;
+    background-color: #EEF9FF;
+    min-width: 500px;
+}
+
+body p, body h1 {
+    color: #5B5B5B;
+}
+
+//bootstrap btnクラス色変更
+
+.btn-primary,
+.btn-primary.disabled, .btn-primary:disabled {
+  color: #fff;
+  background-color: #FC9D9D;
+  border-color: #FC9D9D;
+}
+
+.btn-primary:focus, .btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #FA6A6A;
+  border-color: #FA6A6A;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #FA6A6A;
+  border-color: #FA6A6A;
+}
+
+
+.btn-outline-light {
+    color: #EEF9FF;
+    border-color: #EEF9FF;
+}
+
+//navbar css調整
+.navbar-toggler {
+    border: none;
+}
+
+ @font-face{
+   font-family: 'TimeBurner';
+   src: asset-url('timeburner_regular.ttf') format('truetype');
+ }
+
+.navbar-brand {
+    font-family: 'TimeBurner';
+}
+
+.navbar-brand strong {
+    color: #5B5B5B;   
+    font-size: 30px;
+}
+
+//トップページヘッダー
+.welcome-contents {
+    background-color: #B4DAED;
+    height: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.welcome-title h1 {
+    font-family: 'TimeBurner';
+    font-weight: bold;
+    font-size: 80px;
+    color: #EEF9FF;
+}
+
+.welcome-title p {
+    font-size: 13px;
+    letter-spacing: 7px;
+    color: #EEF9FF; 
+}
+
+.welcome-comment {
+    padding: 8px 10px;
+    background-color: rgba(238, 249, 255, 0.8);
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.welcome-comment p {
+    color: #5B5B5B; 
+    font-size: 12px;
+}
+
+//flashメッセージcss調整
+
+.flash {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    -webkit-transform: translate(-50%);
+    -ms-transform: translate(-50%);
+    top: 13%;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.flash-success {
+    background-color: #66CC99;
+    color: #EEF9FF;
+}
+
+.flash-danger {
+    background-color: #FF4F50;
+    color: #EEF9FF;
+}

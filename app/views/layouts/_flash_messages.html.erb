@@ -1,3 +1,9 @@
 <% flash.each do |type, message| %>
-  <div class="alert alert-<%= type %>"><%= message %></div>
+  <div class="flash flash-<%= type %>"><%= message %></div>
 <% end %>
+<script>
+  $(function(){
+    $('.flash').hide().fadeIn()
+    setTimeout("$('.flash').fadeOut()", 3000) 
+  })
+</script>
