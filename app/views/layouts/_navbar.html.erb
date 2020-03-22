@@ -6,13 +6,24 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item"><a href="#" class="pr-2.3 pl-2 mr-2 mt-1 mb-1 btn btn-primary">新規登録 <i class="fas fa-user-plus"></i></a></li>
-        <li class="nav-item"><a href="#" class="pr-3 pl-2 btn mt-1 mb-1 btn-outline-light">ログイン <i class="fas fa-sign-in-alt"></i></a></li>
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item"><%= link_to 'ユーザープロフィール', root_path %></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% else %>  
+          <li class="nav-item"><a href="/signup" class="pr-2.3 pl-2 mr-2 mt-1 mb-1 btn btn-primary">新規登録 <i class="fas fa-user-plus"></i></a></li>
+          <li class="nav-item"><a href="/login" class="pr-3 pl-2 btn mt-1 mb-1 btn-outline-light">ログイン <i class="fas fa-sign-in-alt"></i></a></li>
+        <% end %>
       </ul>
     </div>
   </nav>
   <%= render 'layouts/flash_messages' %>
-  <% if current_page?(root_path) %>
+  <% if current_page?(root_path) && !logged_in? %>
     <div class="welcome-contents">
         <div class="welcome-title">
           <h1>SyaberuBa</h1>
@@ -22,8 +33,8 @@
           <p>SyaberuBaは様々な人々との議論を通じて学び合うサービスです。<br>
             発言には必ず「意見」と「共感」の双方をご用意ください。
           </p>
-          <a href="#" class="btn btn-primary mr-1">新規登録はこちら</a>
-          <a href="#" class="btn btn-outline-dark ml-1">ログインはこちら</a>
+          <a href="/signup" class="btn btn-primary mr-1">新規登録はこちら</a>
+          <a href="/login" class="btn btn-outline-dark ml-1">ログインはこちら</a>
         </div>
     </div>
     <script>

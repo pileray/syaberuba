@@ -1,0 +1,55 @@
+<ul class="list-unstyled">
+    <% discussions.each do |discussion| %>
+        <li class="media mb-4 shadow p-2 rounded" style="background-color: white;">
+            <% if discussion.user.image? %>
+                <a href="<%= user_path(discussion.user) %>" class="align-self-center" ><%= image_tag discussion.user.image.to_s, class: 'rounded mr-3', size: 50, alt: 'プロフィールイメージ' %></a>
+            <% else %>
+                <a href="<%= user_path(discussion.user) %>" class="align-self-center" ><%= image_tag 'avatar.jpeg', class: 'rounded mr-3', size: 50, alt: 'プロフィールイメージ' %></a>
+            <% end %>
+            <div class="media-body">
+                <h5 class="mb-3 mt-3"><a href="<%= discussion_path(discussion) %>"><strong style="color: black;"><%= discussion.title %></strong></a>
+                    <% unless discussion.assent == nil %>
+                        <%= link_to '納得済', discussion_path(discussion), class: 'btn btn-primary btn-sm mb-1' %>
+                    <% end %>
+                    <% if discussion.user == current_user %>
+                        <% if discussion.assent == nil %>
+                            <%= link_to '納得する！', edit_discussion_path(discussion), class: 'btn btn-info btn-sm mb-1' %>
+                        <% end %>
+                    <% end %>
+                </h5>
+                <% if current_page?(root_url) %>
+                    <div><p><%= discussion.content.truncate(255) %></p></div>
+                <% else %>
+                    <div><p><%= discussion.content %></p></div>
+                <% end %>
+                <% if current_page?(discussion) %>
+                    <% unless discussion.assent_comment == nil %>
+                        <div class="mt-2 border-top">
+                            <h4 class="mt-2">納得コメント</h4>
+                            <p><%= discussion.assent_comment %></p>
+                        </div>
+                    <% end %>
+                <% end %>
+                <div>
+                    <span class="text-muted mr-4">投稿者：<%= link_to discussion.user.name, user_path(discussion.user) %>【<%= discussion.user.job %>・<%= discussion.user.age %>歳・<%= discussion.user.sex %>】</span>
+                    <span class="text-muted mr-4">作成日時：<%= discussion.created_at %></span>
+                    <% if discussion.assent == nil %>
+                        <%= link_to comment_discussion_path(discussion), class: 'mr-3' do %>
+                            <i class="fas fa-comments" style="color: black;"></i><span class="badge badge-info ml-1"><%= discussion.comments.count %></span>
+                        <% end %>
+                    <% else %>
+                        <%= link_to discussion, class: 'mr-3' do %>
+                            <i class="fas fa-comments" style="color: black;"></i><span class="badge badge-info ml-1"><%= discussion.comments.count %></span>
+                        <% end %>
+                    <% end %>
+                    <% if discussion.user == current_user %>
+                        <%= link_to discussion, method: :delete, data: { confirm: "SyaberuBaを削除しますか?" }, class: 'mr-3' do %>
+                            <i class="fas fa-trash" style="color: black;"></i>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </li>
+    <% end %>
+    <%= paginate discussions %>
+</ul>

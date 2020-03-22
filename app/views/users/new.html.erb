@@ -1,32 +1,52 @@
 <div class="text-center">
-    <h1>新規登録</h1>
+    <h1>新規ユーザー登録</h1>
 </div>
 
 <div class="row">
-    <div class="col-sm-6 offset-sm-3">
+    <div class="col-sm-6 offset-sm-3 mb-5">
         <%= form_with(model: @user, local: true) do |f| %>
             <%= render 'layouts/error_messages', model: @user %>
             <div class="form-group">
-                <%= f.label :name, 'Name' %>
-                <%= f.text_field :name, class: 'form-control' %>
+                <%= f.label :name, 'ユーザーネーム' %>
+                <%= f.text_field :name, class: 'form-control', required: true %>
             </div>
             
             <div class="form-group">
-                <%= f.label :email, 'Email' %>
-                <%= f.email_field :email, class: 'form-control' %>
+                <%= f.label :email, 'メールアドレス' %>
+                <%= f.email_field :email, class: 'form-control', required: true %>
             </div>
             
             <div class="form-group">
-                <%= f.label :password, 'Password' %>
-                <%= f.password_field :password, class: 'form-control' %>
+                <%= f.label :job, '職業' %>
+                <%= f.text_field :job, class: 'form-control', required: true %>
             </div>
             
             <div class="form-group">
-                <%= f.label :password_confirmation, 'Confirmation' %>
-                <%= f.password_field :password_confirmation, class: 'form-control' %>
+                <%= f.label :sex, '性別', class: 'd-block' %>
+                <%= f.radio_button :sex, :男性, required: true %>
+                <%= f.label :sex, '男性', class: 'd-inline mr-1' %>
+                <%= f.radio_button :sex, :女性 %>
+                <%= f.label :sex, '女性', class: 'd-inline mr-1' %>
+                <%= f.radio_button :sex, :Xジェンダー %>
+                <%= f.label :sex, 'Xジェンダー', class: 'd-inline' %>
             </div>
             
-            <%= f.submit 'Sign up', class: 'btn btn-primary btn-block' %>
+            <div class="form-group">
+                <%= f.label :age, '年齢' %>
+                <%= f.number_field :age, in: 1.0..120.0, step: 1.0, class: 'form-control', required: true %>
+            </div>
+            
+            <div class="form-group">
+                <%= f.label :password, 'パスワード' %>
+                <%= f.password_field :password, class: 'form-control', required: true %>
+            </div>
+            
+            <div class="form-group">
+                <%= f.label :password_confirmation, 'パスワード（確認）' %>
+                <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+            </div>
+            
+            <%= f.submit '登録する', class: 'btn btn-primary btn-block' %>
         <% end %>
     </div>
 </div>

@@ -17,7 +17,7 @@
 body { 
     padding-top: 70px;
     background-color: #EEF9FF;
-    min-width: 500px;
+    min-width: 400px;
 }
 
 body p, body h1 {
@@ -65,7 +65,7 @@ body p, body h1 {
 
  @font-face{
    font-family: 'TimeBurner';
-   src: asset-url('timeburner_regular.ttf') format('truetype');
+   src: asset_url('timeburner_regular.ttf') format('truetype');
  }
 
 .navbar-brand {
@@ -80,6 +80,9 @@ body p, body h1 {
 //トップページヘッダー
 .welcome-contents {
     background-color: #B4DAED;
+    background-image: url("<%= asset_path('background_image.png') %>");
+    background-position: center;
+    background-size: cover;
     height: 300px;
     width: 100%;
     text-align: center;
@@ -133,4 +136,9 @@ body p, body h1 {
 .flash-danger {
     background-color: #FF4F50;
     color: #EEF9FF;
+}
+
+//バリデーションデザイン修正
+.field_with_errors {
+  display: inline;
 }

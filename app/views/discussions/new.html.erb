@@ -1,0 +1,24 @@
+<div class="text-center">
+  <h1>SyaberuBaの新規作成</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3 mb-5">
+
+    <%= form_with(model: @discussion, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: @discussion %>
+      <div class="form-group">
+        <%= f.label :title, 'タイトル' %>
+        <%= f.text_field :title, class: 'form-control', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :content, '内容' %>
+        <%= f.text_area :content, class: 'form-control', rows: 5, required: true %>
+      </div>
+
+      <%= f.submit 'SyaberuBaを作成する！', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>
+
