@@ -1,0 +1,33 @@
+<% comments.each do |comment| %>
+    <div class="col-lg-6">
+        <div class="media mb-3 mt-3 shadow-sm pt-2 pb-2 pr-4 pl-4 rounded border" style="background-color: white;">
+            <% if comment.user.image? %>
+                <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag comment.user.image.to_s, class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
+            <% else %>
+                <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
+            <% end %>
+            <div class="media-body">
+                <div>
+                    <h5><strong style="color: #5B5B5B;">意見</strong></h5>
+                    <p><%= simple_format(comment.opinion) %></p>
+                </div>
+                <div class="border-top pt-2">
+                    <h5><strong style="color: #5B5B5B;">共感・学び</strong></h5>
+                    <p><%= simple_format(comment.learning) %></p>
+                </div>
+                <div class="ml-2 mt-2">
+                    <div class="text-muted mr-4" style="font-size: 12px;">投稿者：<%= link_to comment.user.name, user_path(comment.user) %>【<%= comment.user.job %>・<%= comment.user.age %>歳・<%= comment.user.sex %>】</div>
+                    <div class="text-muted mr-4" style="font-size: 12px;">作成日時：<%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+                    <div>
+                        <% if comment.user == current_user %>
+                            <%= link_to comment, method: :delete, data: { confirm: "発言を削除しますか?" }, class: 'mr-3' do %>
+                                <i class="fas fa-trash" style="color: #B4DAED;"></i>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+<%= paginate comments %>

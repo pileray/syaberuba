@@ -1,55 +1,66 @@
-<ul class="list-unstyled">
-    <% discussions.each do |discussion| %>
-        <li class="media mb-4 shadow p-2 rounded" style="background-color: white;">
-            <% if discussion.user.image? %>
-                <a href="<%= user_path(discussion.user) %>" class="align-self-center" ><%= image_tag discussion.user.image.to_s, class: 'rounded mr-3', size: 50, alt: 'プロフィールイメージ' %></a>
-            <% else %>
-                <a href="<%= user_path(discussion.user) %>" class="align-self-center" ><%= image_tag 'avatar.jpeg', class: 'rounded mr-3', size: 50, alt: 'プロフィールイメージ' %></a>
-            <% end %>
-            <div class="media-body">
-                <h5 class="mb-3 mt-3"><a href="<%= discussion_path(discussion) %>"><strong style="color: black;"><%= discussion.title %></strong></a>
+<% discussions.each do |discussion| %>
+    <% if current_page?(root_url) %>
+      <div class="col-xl-4 col-md-6">
+    <% else %>
+      <div>
+    <% end %>
+        <div class="rounded border shadow-sm mt-3 p-2 mb-3" style="background-color: #ffffff;">
+            <div class="mb-3 ml-2">
+                <% if discussion.user.image? %>
+                    <a href="<%= user_path(discussion.user) %>"><%= image_tag discussion.user.image.to_s, class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
+                <% else %>
+                    <a href="<%= user_path(discussion.user) %>"><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
+                <% end %>
+            
+                <h6 class="d-inline"><a href="<%= discussion_path(discussion) %>"><strong style="color: #5B5B5B;"><%= discussion.title %></strong></a>
                     <% unless discussion.assent == nil %>
-                        <%= link_to '納得済', discussion_path(discussion), class: 'btn btn-primary btn-sm mb-1' %>
+                        <%= link_to '納得済', discussion_path(discussion), class: 'btn btn-outline-danger btn-sm mb-1 ml-2', style: 'font-size: 5px;' %>
                     <% end %>
                     <% if discussion.user == current_user %>
                         <% if discussion.assent == nil %>
-                            <%= link_to '納得する！', edit_discussion_path(discussion), class: 'btn btn-info btn-sm mb-1' %>
+                            <%= link_to '納得する！', edit_discussion_path(discussion), class: 'btn btn-outline-secondary btn-sm mb-1 ml-2', style: 'font-size: 5px;' %>
                         <% end %>
                     <% end %>
-                </h5>
-                <% if current_page?(root_url) %>
-                    <div><p><%= discussion.content.truncate(255) %></p></div>
-                <% else %>
-                    <div><p><%= discussion.content %></p></div>
+                </h6>
+            </div>
+        <% if current_page?(root_url) %>
+            <div class="mr-3 ml-3">
+                <p style="font-size: 13px;"><%= discussion.content.truncate(144) %></p>
+            </div>
+        <% else %>
+            <div class="ml-3">
+                <p><%= simple_format(discussion.content) %></p>
+            </div>
+        <% end %>
+            <% if current_page?(discussion) %>
+                <% unless discussion.assent_comment == nil %>
+                    <div class="mt-2 ml-3 border-top">
+                        <h6 class="mt-2"><strong style="color: #5B5B5B;">納得コメント</strong></h6>
+                        <p><%= simple_format(discussion.assent_comment) %></p>
+                    </div>
                 <% end %>
-                <% if current_page?(discussion) %>
-                    <% unless discussion.assent_comment == nil %>
-                        <div class="mt-2 border-top">
-                            <h4 class="mt-2">納得コメント</h4>
-                            <p><%= discussion.assent_comment %></p>
-                        </div>
-                    <% end %>
-                <% end %>
+            <% end %>
+            <div class="ml-2 mt-2">
+                <div class="text-muted" style="font-size: 12px;">投稿者：<%= link_to discussion.user.name, user_path(discussion.user) %>【<%= discussion.user.job %>・<%= discussion.user.age %>歳・<%= discussion.user.sex %>】</div>
+                <div class="text-muted" style="font-size: 12px;">作成日時：<%= discussion.created_at.strftime("%Y-%m-%d %H:%M") %></div>
                 <div>
-                    <span class="text-muted mr-4">投稿者：<%= link_to discussion.user.name, user_path(discussion.user) %>【<%= discussion.user.job %>・<%= discussion.user.age %>歳・<%= discussion.user.sex %>】</span>
-                    <span class="text-muted mr-4">作成日時：<%= discussion.created_at %></span>
                     <% if discussion.assent == nil %>
                         <%= link_to comment_discussion_path(discussion), class: 'mr-3' do %>
-                            <i class="fas fa-comments" style="color: black;"></i><span class="badge badge-info ml-1"><%= discussion.comments.count %></span>
+                            <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
                         <% end %>
                     <% else %>
                         <%= link_to discussion, class: 'mr-3' do %>
-                            <i class="fas fa-comments" style="color: black;"></i><span class="badge badge-info ml-1"><%= discussion.comments.count %></span>
+                            <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
                         <% end %>
                     <% end %>
                     <% if discussion.user == current_user %>
                         <%= link_to discussion, method: :delete, data: { confirm: "SyaberuBaを削除しますか?" }, class: 'mr-3' do %>
-                            <i class="fas fa-trash" style="color: black;"></i>
+                            <i class="fas fa-trash" style="color: #B4DAED;"></i>
                         <% end %>
                     <% end %>
                 </div>
             </div>
-        </li>
-    <% end %>
-    <%= paginate discussions %>
-</ul>
+        </div>
+    </div>
+<% end %>
+<%= paginate discussions %>

@@ -8,17 +8,17 @@
             <%= render 'layouts/error_messages', model: @user %>
             <div class="form-group">
                 <%= f.label :name, 'ユーザーネーム' %>
-                <%= f.text_field :name, class: 'form-control', required: true %>
+                <%= f.text_field :name, class: 'form-control', required: true, placeholder: 'SyaberuBa表示名' %>
             </div>
             
             <div class="form-group">
                 <%= f.label :email, 'メールアドレス' %>
-                <%= f.email_field :email, class: 'form-control', required: true %>
+                <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'example@example.com' %>
             </div>
             
             <div class="form-group">
                 <%= f.label :job, '職業' %>
-                <%= f.text_field :job, class: 'form-control', required: true %>
+                <%= f.text_field :job, class: 'form-control', required: true, placeholder: '業種・役職など' %>
             </div>
             
             <div class="form-group">
@@ -46,7 +46,7 @@
                 <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
             </div>
             
-            <%= f.submit '登録する', class: 'btn btn-primary btn-block' %>
+            <%= f.submit '登録する', class: 'btn btn-primary btn-block rounded-pill' %>
         <% end %>
     </div>
 </div>

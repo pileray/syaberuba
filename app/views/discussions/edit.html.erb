@@ -7,9 +7,9 @@
         <%= render 'layouts/error_messages', model: @discussion %>
         <div class="form-group">
           <%= f.label :assent_comment, '納得コメント' %>
-          <%= f.text_area :assent_comment, class: 'form-control', rows: 5, required: true %>
+          <%= f.text_area :assent_comment, class: 'form-control', rows: 5, required: true, placeholder: '納得した理由・学び等をご記入ください（500字以内）' %>
         </div>
-        <%= f.submit '発言募集を終了し納得する！', class: 'btn btn-primary btn-block' %>
+        <%= f.submit '発言募集を終了し納得する！', class: 'btn btn-primary btn-block rounded-pill' %>
       <% end %>
     </div>
 </div>

@@ -7,6 +7,7 @@ class DiscussionsController < ApplicationController
 
   def show
     @discussion = Discussion.where(id: params[:id]).page(params[:page])
+    @comments = Comment.where(discussion_id: params[:id]).order(id: :desc).page(params[:page]).per(5)
   end
 
   def new

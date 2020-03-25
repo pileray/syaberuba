@@ -15,6 +15,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = current_user.comments.find_by(id: params[:id])
+    @discussion = @comment.discussion
+    if !!@comment
+      @comment.destroy
+      flash[:success] = '発言を削除しました。'
+      redirect_to @discussion
+    else
+      redirect_to root_url
+    end
   end
   
   private
