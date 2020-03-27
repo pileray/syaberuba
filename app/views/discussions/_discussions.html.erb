@@ -4,7 +4,7 @@
     <% else %>
       <div>
     <% end %>
-        <div class="rounded border shadow-sm mt-3 p-2 mb-3" style="background-color: #ffffff;">
+        <div class="rounded border shadow-sm mt-3 p-3 mb-3" style="background-color: #ffffff;">
             <div class="mb-3 ml-2">
                 <% if discussion.user.image? %>
                     <a href="<%= user_path(discussion.user) %>"><%= image_tag discussion.user.image.to_s, class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
@@ -25,18 +25,18 @@
             </div>
         <% if current_page?(root_url) %>
             <div class="mr-3 ml-3">
-                <p style="font-size: 13px;"><%= discussion.content.truncate(144) %></p>
+                <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= discussion.content.truncate(144) %></p>
             </div>
         <% else %>
             <div class="ml-3">
-                <p><%= simple_format(discussion.content) %></p>
+                <p><%= simple_format(discussion.content, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
             </div>
         <% end %>
             <% if current_page?(discussion) %>
                 <% unless discussion.assent_comment == nil %>
                     <div class="mt-2 ml-3 border-top">
                         <h6 class="mt-2"><strong style="color: #5B5B5B;">納得コメント</strong></h6>
-                        <p><%= simple_format(discussion.assent_comment) %></p>
+                        <p><%= simple_format(discussion.assent_comment, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
                     </div>
                 <% end %>
             <% end %>

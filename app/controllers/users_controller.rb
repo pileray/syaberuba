@@ -20,12 +20,38 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @discussions = @user.discussions
+    @comments = @user.comments
   end
 
   def edit
+    @user = User.find(params[:id])
+    unless current_user == @user
+      redirect_to root_url
+    end
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user == current_user
+      if @user.update(user_params)
+        flash[:success] = 'ユーザー情報を編集しました。'
+        redirect_to @user
+      else
+        flash.now[:danger] = 'ユーザー情報の編集に失敗しました。'
+        render :edit
+      end
+    else
+      redirect_to root_url
+    end
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = '退会しました。'
+    redirect_to root_url
   end
   
   private
