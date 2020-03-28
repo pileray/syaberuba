@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build( discussion_id: params[:discussion_id] )
     @show_discussion = Discussion.find(params[:discussion_id])
-    @discussion = Discussion.where(id: params[:discussion_id]).page(params[:page])
+    @discussion = Discussion.where(id: params[:discussion_id]).page(params[:comment_page])
     if @comment.update( comment_params )
       flash[:success] = 'SyaberuBaに発言しました！'
       redirect_to @show_discussion

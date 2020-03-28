@@ -23,7 +23,7 @@
                     <% end %>
                 </h6>
             </div>
-        <% if current_page?(root_url) %>
+        <% if current_page?(root_url) || current_page?(discussion.user) %>
             <div class="mr-3 ml-3">
                 <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= discussion.content.truncate(144) %></p>
             </div>
@@ -63,4 +63,4 @@
         </div>
     </div>
 <% end %>
-<%= paginate discussions %>
+<%= paginate discussions, param_name: 'discussion_page' %>

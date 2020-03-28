@@ -21,8 +21,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @discussions = @user.discussions
-    @comments = @user.comments
+    @discussions = @user.discussions.page(params[:discussion_page]).per(3)
+    @comments = @user.comments.page(params[:comment_page]).per(3)
   end
 
   def edit

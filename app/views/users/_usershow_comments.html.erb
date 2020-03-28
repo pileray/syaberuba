@@ -30,7 +30,8 @@
                     <div class="ml-2 mt-2">
                         <div class="text-muted mr-4" style="font-size: 12px;">投稿者：<%= link_to comment.user.name, user_path(comment.user) %>【<%= comment.user.job %>・<%= comment.user.age %>歳・<%= comment.user.sex %>】</div>
                         <div class="text-muted mr-4" style="font-size: 12px;">作成日時：<%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-                        <div>
+                        <div class="mt-1">
+                            <%= link_to '発言されたSyaberuBa', discussion_path(comment.discussion), class: 'btn btn-sm btn-outline-info mr-2' %>
                             <% if comment.user == current_user %>
                                 <%= link_to comment, method: :delete, data: { confirm: "発言を削除しますか?" }, class: 'mr-3' do %>
                                     <i class="fas fa-trash" style="color: #B4DAED;"></i>

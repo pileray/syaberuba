@@ -2,12 +2,12 @@ class DiscussionsController < ApplicationController
   before_action :require_user_logged_in, only: [ :new, :create, :edit, :update, :destroy, :comment ]
   
   def index
-    @discussions = Discussion.all.order(id: :desc).page(params[:page]).per(5)
+    @discussions = Discussion.all.order(id: :desc).page(params[:discussion_page]).per(9)
   end
 
   def show
-    @discussion = Discussion.where(id: params[:id]).page(params[:page])
-    @comments = Comment.where(discussion_id: params[:id]).order(id: :desc).page(params[:page]).per(5)
+    @discussion = Discussion.where(id: params[:id]).page(params[:discussion_page])
+    @comments = Comment.where(discussion_id: params[:id]).order(id: :desc).page(params[:comment_page]).per(4)
   end
 
   def new
@@ -26,7 +26,7 @@ class DiscussionsController < ApplicationController
   end
 
   def edit
-    @show_discussion = Discussion.where(id: params[:id]).page(params[:page])
+    @show_discussion = Discussion.where(id: params[:id]).page(params[:discussion_page])
     @discussion = Discussion.find_by(id: params[:id])
   end
 
@@ -55,7 +55,7 @@ class DiscussionsController < ApplicationController
   
   def comment
     @comment = current_user.comments.build
-    @discussion = Discussion.where(id: params[:id]).page(params[:page])
+    @discussion = Discussion.where(id: params[:id]).page(params[:discussion_page])
   end
   
   private
