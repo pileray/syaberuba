@@ -14,6 +14,8 @@
                     <div class="mt-1">年齢：<%= @user.age %></div>
                     <div class="mt-1">職業：<%= @user.job %></div>  
                 </div>
+                <div class="text-center mt-1"><strong>わかる/うーん…比</strong></div>
+                <%= pie_chart @chart %>
                 <% if @user == current_user %>
                     <%= link_to 'ユーザー情報の編集', edit_user_path(@user), class: "btn-sm btn-primary btn-block mt-3 text-center" %>
                 <% end %>
@@ -21,9 +23,9 @@
         </div>
     </div>
     <div class="col-md-8">
-        <h4 class="border-bottom" style="color: #5B5B5B;">投稿したSyaberuBa</h4>
+        <h4 class="border-bottom" style="color: #5B5B5B;">SyaberuBa</h4>
         <%= render 'discussions/discussions', discussions: @discussions %>
-        <h4 class="border-bottom" style="color: #5B5B5B;">投稿した発言</h4>
+        <h4 class="border-bottom mt-2" style="color: #5B5B5B;">発言</h4>
         <%= render 'users/usershow_comments', comments: @comments %>
     </div>
 </div>

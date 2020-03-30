@@ -58,3 +58,5 @@ gem 'kaminari'
 gem "jquery-rails"
 gem 'carrierwave'
 gem 'fog-aws'
+gem "chartkick"
+gem 'chartable'

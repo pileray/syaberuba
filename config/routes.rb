@@ -17,5 +17,8 @@ Rails.application.routes.draw do
   
   resources :comments, only: [ :create, :destroy ]
   
+  resources :empathies, only: [ :create, :destroy ]
+  resources :objections, only: [ :create, :destroy ]
+  
   
 end

@@ -1,0 +1,13 @@
+<% if current_user.empathy_comments.include?(comment) %>
+    <%= form_with( model: current_user.empathies.find_by(comment_id: comment.id), local: true, method: :delete, class: 'd-inline') do |f| %>
+        <%= hidden_field_tag :comment_id, comment.id %>
+        <%= f.submit 'わかる', class: 'btn btn-primary rounded-pill btn-sm', style: 'font-size: 8px;' %>
+        <span class="badge badge-light mr-1"><%= comment.empathies.count %></span>
+    <% end %>
+<% else %>
+    <%= form_with( model: current_user.empathies.build, local: true, class: 'd-inline') do |f| %>
+        <%= hidden_field_tag :comment_id, comment.id %>
+        <%= f.submit 'わかる', class: 'btn btn-secondary btn-sm rounded-pill', style: 'font-size: 8px;' %>
+        <span class="badge badge-light mr-1"><%= comment.empathies.count %></span>
+    <% end %>
+<% end %>
