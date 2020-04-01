@@ -44,14 +44,8 @@
                 <div class="text-muted" style="font-size: 12px;">投稿者：<%= link_to discussion.user.name, user_path(discussion.user) %>【<%= discussion.user.job %>・<%= discussion.user.age %>歳・<%= discussion.user.sex %>】</div>
                 <div class="text-muted" style="font-size: 12px;">作成日時：<%= discussion.created_at.strftime("%Y-%m-%d %H:%M") %></div>
                 <div>
-                    <% if discussion.assent == nil %>
-                        <%= link_to comment_discussion_path(discussion), class: 'mr-3' do %>
-                            <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
-                        <% end %>
-                    <% else %>
-                        <%= link_to discussion, class: 'mr-3' do %>
-                            <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
-                        <% end %>
+                    <%= link_to discussion, class: 'mr-3' do %>
+                        <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
                     <% end %>
                     <% if discussion.user == current_user %>
                         <%= link_to discussion, method: :delete, data: { confirm: "SyaberuBaを削除しますか?" }, class: 'mr-3' do %>
