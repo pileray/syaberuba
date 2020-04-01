@@ -1,5 +1,5 @@
 <% discussions.each do |discussion| %>
-    <% if current_page?(root_url) %>
+    <% if current_page?(root_url) || current_page?(discussions_path) %>
       <div class="col-xl-4 col-md-6">
     <% else %>
       <div>

@@ -1,12 +1,19 @@
-<% if current_user.objection_comments.include?(comment) %>
-    <%= form_with( model: current_user.objections.find_by(comment_id: comment.id), local: true, method: :delete, class: 'd-inline') do |f| %>
-        <%= hidden_field_tag :comment_id, comment.id %>
-        <%= f.submit 'うーん…', class: 'btn btn-danger rounded-pill btn-sm ml-1', style: 'font-size: 8px;' %>
-        <span class="badge badge-light mr-1"><%= comment.objections.count %></span>
+<% if logged_in? %>
+    <% if current_user.objection_comments.include?(comment) %>
+        <%= form_with( model: current_user.objections.find_by(comment_id: comment.id), local: true, method: :delete, class: 'd-inline') do |f| %>
+            <%= hidden_field_tag :comment_id, comment.id %>
+            <%= f.submit 'うーん…', class: 'btn btn-danger rounded-pill btn-sm ml-1', style: 'font-size: 8px;' %>
+            <span class="badge badge-light mr-1"><%= comment.objections.count %></span>
+        <% end %>
+    <% else %>
+        <%= form_with( model: current_user.objections.build, local: true, class: 'd-inline') do |f| %>
+            <%= hidden_field_tag :comment_id, comment.id %>
+            <%= f.submit 'うーん…', class: 'btn btn-secondary btn-sm rounded-pill ml-1', style: 'font-size: 8px;' %>
+            <span class="badge badge-light mr-1"><%= comment.objections.count %></span>
+        <% end %>
     <% end %>
 <% else %>
-    <%= form_with( model: current_user.objections.build, local: true, class: 'd-inline') do |f| %>
-        <%= hidden_field_tag :comment_id, comment.id %>
+    <%= form_with( url: objections_path, local: true, class: 'd-inline') do |f| %>
         <%= f.submit 'うーん…', class: 'btn btn-secondary btn-sm rounded-pill ml-1', style: 'font-size: 8px;' %>
         <span class="badge badge-light mr-1"><%= comment.objections.count %></span>
     <% end %>
