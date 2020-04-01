@@ -23,7 +23,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @discussions = @user.discussions.page(params[:discussion_page]).per(3)
     @comments = @user.comments.page(params[:comment_page]).per(3)
-    @chart = { 'わかる': Empathy.where(user_id: @user.id).count, 'うーん…': Objection.where(user_id: @user.id).count }
+    def find_comment_id
+      @user.comments.each do |comment|
+        comment_id = []
+        comment_id.push(comment.id)
+      end
+    end
+    @chart = { 'わかる': Empathy.where(comment_id: find_comment_id).count, 'うーん…': Objection.where(comment_id: find_comment_id).count }
   end
 
   def edit
