@@ -2,10 +2,22 @@
     <h1>新規ユーザー登録</h1>
 </div>
 
+<div class="text-center mt-3 mb-4">
+    <%= link_to '/auth/twitter', class: 'btn btn-sm btn-info mr-2' do %>
+        <i class="fab fa-twitter mr-1"></i>Twitterアカウントで登録
+    <% end %>
+    <%= link_to '/auth/google_oauth2', class: 'btn btn-sm btn-danger' do %>
+        <i class="fab fa-google mr-1"></i>Googleアカウントで登録
+    <% end %>
+</div>
+
 <div class="row">
     <div class="col-sm-6 offset-sm-3 mb-5">
         <%= form_with(model: @user, local: true) do |f| %>
             <%= render 'layouts/error_messages', model: @user %>
+            <%= f.hidden_field :remote_image_url %>
+            <%= f.hidden_field :provider %>
+            <%= f.hidden_field :uid %>
             <div class="form-group">
                 <%= f.label :name, 'ユーザーネーム' %>
                 <%= f.text_field :name, class: 'form-control', required: true, placeholder: 'SyaberuBa表示名' %>

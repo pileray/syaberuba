@@ -60,3 +60,7 @@ gem 'carrierwave'
 gem 'fog-aws'
 gem "chartkick"
 gem 'chartable'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'dotenv-rails'
