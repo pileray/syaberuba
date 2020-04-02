@@ -1,64 +1,56 @@
 <div class="text-center">
-    <h1>新規ユーザー登録</h1>
+  <h1>新規ユーザー登録</h1>
 </div>
 
 <div class="text-center mt-3 mb-4">
-    <%= link_to '/auth/twitter', class: 'btn btn-sm btn-info d-inlineblock mb-1' do %>
-        <i class="fab fa-twitter mr-1"></i>Twitterアカウントで登録
-    <% end %>
-    <%= link_to '/auth/google_oauth2', class: 'btn btn-sm btn-danger d-inlineblock mb-1' do %>
-        <i class="fab fa-google mr-1"></i>Googleアカウントで登録
-    <% end %>
+  <%= link_to '/auth/twitter', class: 'btn btn-sm btn-info d-inlineblock mb-1' do %>
+    <i class="fab fa-twitter mr-1"></i>Twitterアカウントで登録
+  <% end %>
+  <%= link_to '/auth/google_oauth2', class: 'btn btn-sm btn-danger d-inlineblock mb-1' do %>
+    <i class="fab fa-google mr-1"></i>Googleアカウントで登録
+  <% end %>
 </div>
-
 <div class="row">
-    <div class="col-sm-6 offset-sm-3 mb-5">
-        <%= form_with(model: @user, local: true) do |f| %>
-            <%= render 'layouts/error_messages', model: @user %>
-            <%= f.hidden_field :remote_image_url %>
-            <%= f.hidden_field :provider %>
-            <%= f.hidden_field :uid %>
-            <div class="form-group">
-                <%= f.label :name, 'ユーザーネーム' %>
-                <%= f.text_field :name, class: 'form-control', required: true, placeholder: 'SyaberuBa表示名' %>
-            </div>
-            
-            <div class="form-group">
-                <%= f.label :email, 'メールアドレス' %>
-                <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'example@example.com' %>
-            </div>
-            
-            <div class="form-group">
-                <%= f.label :job, '職業' %>
-                <%= f.text_field :job, class: 'form-control', required: true, placeholder: '業種・役職など' %>
-            </div>
-            
-            <div class="form-group">
-                <%= f.label :sex, '性別', class: 'd-block' %>
-                <%= f.radio_button :sex, :男性, required: true %>
-                <%= f.label :sex, '男性', class: 'd-inline mr-1' %>
-                <%= f.radio_button :sex, :女性 %>
-                <%= f.label :sex, '女性', class: 'd-inline mr-1' %>
-                <%= f.radio_button :sex, :Xジェンダー %>
-                <%= f.label :sex, 'Xジェンダー', class: 'd-inline' %>
-            </div>
-            
-            <div class="form-group">
-                <%= f.label :age, '年齢' %>
-                <%= f.number_field :age, in: 1.0..120.0, step: 1.0, class: 'form-control', required: true %>
-            </div>
-            
-            <div class="form-group">
-                <%= f.label :password, 'パスワード' %>
-                <%= f.password_field :password, class: 'form-control', required: true %>
-            </div>
-            
-            <div class="form-group">
-                <%= f.label :password_confirmation, 'パスワード（確認）' %>
-                <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
-            </div>
-            
-            <%= f.submit '登録する', class: 'btn btn-primary btn-block rounded-pill' %>
-        <% end %>
-    </div>
+  <div class="col-sm-6 offset-sm-3 mb-5">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: @user %>
+      <%= f.hidden_field :remote_image_url %>
+      <%= f.hidden_field :provider %>
+      <%= f.hidden_field :uid %>
+      <div class="form-group">
+        <%= f.label :name, 'ユーザーネーム' %>
+        <%= f.text_field :name, class: 'form-control', required: true, placeholder: 'SyaberuBa表示名' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'example@example.com' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :job, '職業' %>
+        <%= f.text_field :job, class: 'form-control', required: true, placeholder: '業種・役職など' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :sex, '性別', class: 'd-block' %>
+        <%= f.radio_button :sex, :男性, required: true %>
+        <%= f.label :sex, '男性', class: 'd-inline mr-1' %>
+        <%= f.radio_button :sex, :女性 %>
+        <%= f.label :sex, '女性', class: 'd-inline mr-1' %>
+        <%= f.radio_button :sex, :Xジェンダー %>
+        <%= f.label :sex, 'Xジェンダー', class: 'd-inline' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :age, '年齢' %>
+        <%= f.number_field :age, in: 1.0..120.0, step: 1.0, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'パスワード（確認）' %>
+        <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+      </div>
+      <%= f.submit '登録する', class: 'btn btn-primary btn-block rounded-pill' %>
+    <% end %>
+  </div>
 </div>

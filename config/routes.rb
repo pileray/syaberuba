@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   resources :empathies, only: [ :create, :destroy ]
   resources :objections, only: [ :create, :destroy ]
   
-  get 'auth/twitter/callback', to: 'callbacks#twitter'
-  get 'auth/google_oauth2/callback', to: 'callbacks#google'
-  
+  get 'auth/:provider/callback', to: 'callbacks#new_or_create'
   
 end

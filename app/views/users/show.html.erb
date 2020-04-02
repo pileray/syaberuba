@@ -1,31 +1,31 @@
 <div class="row" %>
-    <div class="col-md-4" %>
-        <div class="card">
-            <div class="card-body">
-                <% if @user.image? %>
-                    <%= image_tag @user.image.to_s, class: 'rounded img-fluid', size: 500 %>
-                <% else %>
-                    <%= image_tag 'avatar.jpeg', class: 'rounded img-fluid', size: 500 %>
-                <% end %>
-                <div style="font-size: 13px; color: #5B5B5B;" class="mt-3 pb-2 border-bottom">
-                    <div>SyaberuBa数：<strong style="font-size: 15px;"><%= @user.discussions.count %></strong>　/　発言数：<strong style="font-size: 15px;"><%= @user.comments.count %></strong></div>
-                    <div class="mt-1">ユーザー名：<%= @user.name %></div>
-                    <div class="mt-1">性別：<%= @user.sex %></div>
-                    <div class="mt-1">年齢：<%= @user.age %></div>
-                    <div class="mt-1">職業：<%= @user.job %></div>  
-                </div>
-                <div class="text-center mt-1"><strong>わかる/うーん…比</strong></div>
-                <%= pie_chart @chart %>
-                <% if @user == current_user %>
-                    <%= link_to 'ユーザー情報の編集', edit_user_path(@user), class: "btn-sm btn-primary btn-block mt-3 text-center" %>
-                <% end %>
-            </div>
+  <div class="col-md-4" %>
+    <div class="card">
+      <div class="card-body">
+        <% if @user.image? %>
+          <%= image_tag @user.image.to_s, class: 'rounded img-fluid', size: 500 %>
+        <% else %>
+          <%= image_tag 'avatar.jpeg', class: 'rounded img-fluid', size: 500 %>
+        <% end %>
+        <div style="font-size: 13px; color: #5B5B5B;" class="mt-3 pb-2 border-bottom">
+          <div>SyaberuBa数：<strong style="font-size: 15px;"><%= @user.discussions.count %></strong>　/　発言数：<strong style="font-size: 15px;"><%= @user.comments.count %></strong></div>
+          <div class="mt-1">ユーザー名：<%= @user.name %></div>
+          <div class="mt-1">性別：<%= @user.sex %></div>
+          <div class="mt-1">年齢：<%= @user.age %></div>
+          <div class="mt-1">職業：<%= @user.job %></div>  
         </div>
+        <div class="text-center mt-1"><strong>わかる/うーん…比</strong></div>
+        <%= pie_chart @chart %>
+        <% if @user == current_user %>
+          <%= link_to 'ユーザー情報の編集', edit_user_path(@user), class: "btn-sm btn-primary btn-block mt-3 text-center" %>
+        <% end %>
+      </div>
     </div>
-    <div class="col-md-8">
-        <h4 class="border-bottom" style="color: #5B5B5B;">SyaberuBa</h4>
-        <%= render 'discussions/discussions', discussions: @discussions %>
-        <h4 class="border-bottom mt-2" style="color: #5B5B5B;">発言</h4>
-        <%= render 'users/usershow_comments', comments: @comments %>
-    </div>
+  </div>
+  <div class="col-md-8">
+    <h4 class="border-bottom" style="color: #5B5B5B;">SyaberuBa</h4>
+    <%= render 'discussions/discussions', discussions: @discussions %>
+    <h4 class="border-bottom mt-2" style="color: #5B5B5B;">発言</h4>
+    <%= render 'users/usershow_comments', comments: @comments %>
+  </div>
 </div>

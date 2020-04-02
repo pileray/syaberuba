@@ -1,48 +1,48 @@
 <% comments.each do |comment| %>
-    <% if current_page?(comment.discussion) %>
-        <div class="col-lg-6">
-    <% else %>
-        <div>
-    <% end %>
-            <div class="media mb-3 mt-3 shadow-sm pt-3 pb-3 pr-5 pl-3 rounded border" style="background-color: #fff9f9;">
-                <% if comment.user.image? %>
-                    <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag comment.user.image.to_s, class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
-                <% else %>
-                    <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
+  <% if current_page?(comment.discussion) %>
+    <div class="col-lg-6">
+  <% else %>
+    <div>
+  <% end %>
+      <div class="media mb-3 mt-3 shadow-sm pt-3 pb-3 pr-5 pl-3 rounded border" style="background-color: #fff9f9;">
+        <% if comment.user.image? %>
+          <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag comment.user.image.to_s, class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
+        <% else %>
+          <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
+        <% end %>
+        <div class="media-body">
+          <div>
+            <h6><strong style="color: #5B5B5B;">意見</strong></h6>
+            <% if current_page?(comment.user) %>
+              <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= comment.opinion.truncate(144) %></p>
+            <% else %>
+              <p><%= simple_format(comment.opinion, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
+            <% end %>
+          </div>
+          <div class="border-top pt-2">
+            <h6><strong style="color: #5B5B5B;">共感・学び</strong></h6>
+            <% if current_page?(comment.user) %>
+              <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= comment.learning.truncate(144) %></p>
+            <% else %>
+              <p><%= simple_format(comment.learning, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
+            <% end %>
+          </div>
+          <div class="ml-2 mt-2">
+            <div class="text-muted mr-4" style="font-size: 12px;">投稿者：<%= link_to comment.user.name, user_path(comment.user) %>【<%= comment.user.job %>・<%= comment.user.age %>歳・<%= comment.user.sex %>】</div>
+            <div class="text-muted mr-4" style="font-size: 12px;">作成日時：<%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+            <div class="mt-1">
+              <%= render 'comments/empathies_button', comment: comment %>/
+              <%= render 'comments/objections_button', comment: comment %>
+              <% if comment.user == current_user %>
+                <%= link_to comment, method: :delete, data: { confirm: "発言を削除しますか?" }, class: 'mr-3 mt-2' do %>
+                  <i class="fas fa-trash" style="color: #B4DAED;"></i>
                 <% end %>
-                <div class="media-body">
-                    <div>
-                        <h6><strong style="color: #5B5B5B;">意見</strong></h6>
-                        <% if current_page?(comment.user) %>
-                            <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= comment.opinion.truncate(144) %></p>
-                        <% else %>
-                            <p><%= simple_format(comment.opinion, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
-                        <% end %>
-                    </div>
-                    <div class="border-top pt-2">
-                        <h6><strong style="color: #5B5B5B;">共感・学び</strong></h6>
-                        <% if current_page?(comment.user) %>
-                            <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= comment.learning.truncate(144) %></p>
-                        <% else %>
-                            <p><%= simple_format(comment.learning, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
-                        <% end %>
-                    </div>
-                    <div class="ml-2 mt-2">
-                        <div class="text-muted mr-4" style="font-size: 12px;">投稿者：<%= link_to comment.user.name, user_path(comment.user) %>【<%= comment.user.job %>・<%= comment.user.age %>歳・<%= comment.user.sex %>】</div>
-                        <div class="text-muted mr-4" style="font-size: 12px;">作成日時：<%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-                        <div class="mt-1">
-                            <%= render 'comments/empathies_button', comment: comment %>/
-                            <%= render 'comments/objections_button', comment: comment %>
-                            <% if comment.user == current_user %>
-                                <%= link_to comment, method: :delete, data: { confirm: "発言を削除しますか?" }, class: 'mr-3 mt-2' do %>
-                                    <i class="fas fa-trash" style="color: #B4DAED;"></i>
-                                <% end %>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
+              <% end %>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
 <% end %>
 <div class="text-center">
     <%= paginate comments, param_name: 'comment_page' %>

@@ -1,62 +1,62 @@
 <% discussions.each do |discussion| %>
-    <% if current_page?(root_url) || current_page?(discussions_path) %>
-      <div class="col-xl-4 col-md-6">
-    <% else %>
-      <div>
-    <% end %>
-        <div class="rounded border shadow-sm mt-3 p-3 mb-3" style="background-color: #ffffff;">
-            <div class="mb-3 ml-2">
-                <% if discussion.user.image? %>
-                    <a href="<%= user_path(discussion.user) %>"><%= image_tag discussion.user.image.to_s, class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
-                <% else %>
-                    <a href="<%= user_path(discussion.user) %>"><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
-                <% end %>
-            
-                <h6 class="d-inline"><a href="<%= discussion_path(discussion) %>"><strong style="color: #5B5B5B;"><%= discussion.title %></strong></a>
-                    <% unless discussion.assent == nil %>
-                        <%= link_to '納得済', discussion_path(discussion), class: 'btn btn-outline-danger btn-sm mb-1 ml-2', style: 'font-size: 5px;' %>
-                    <% end %>
-                    <% if discussion.user == current_user %>
-                        <% if discussion.assent == nil %>
-                            <%= link_to '納得する！', edit_discussion_path(discussion), class: 'btn btn-outline-secondary btn-sm mb-1 ml-2', style: 'font-size: 5px;' %>
-                        <% end %>
-                    <% end %>
-                </h6>
-            </div>
-        <% if current_page?(root_url) || current_page?(discussion.user) %>
-            <div class="mr-3 ml-3">
-                <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= discussion.content.truncate(144) %></p>
-            </div>
-        <% else %>
-            <div class="ml-3">
-                <p><%= simple_format(discussion.content, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
-            </div>
-        <% end %>
-            <% if current_page?(discussion) %>
-                <% unless discussion.assent_comment == nil %>
-                    <div class="mt-2 ml-3 border-top">
-                        <h6 class="mt-2"><strong style="color: #5B5B5B;">納得コメント</strong></h6>
-                        <p><%= simple_format(discussion.assent_comment, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
-                    </div>
-                <% end %>
+  <% if current_page?(root_url) || current_page?(discussions_path) %>
+    <div class="col-xl-4 col-md-6">
+  <% else %>
+    <div>
+  <% end %>
+      <div class="rounded border shadow-sm mt-3 p-3 mb-3" style="background-color: #ffffff;">
+        <div class="mb-3 ml-2">
+          <% if discussion.user.image? %>
+              <a href="<%= user_path(discussion.user) %>"><%= image_tag discussion.user.image.to_s, class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
+          <% else %>
+              <a href="<%= user_path(discussion.user) %>"><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-2', size: 40, alt: 'プロフィールイメージ' %></a>
+          <% end %>
+          <h6 class="d-inline">
+            <a href="<%= discussion_path(discussion) %>"><strong style="color: #5B5B5B;"><%= discussion.title %></strong></a>
+            <% unless discussion.assent == nil %>
+              <%= link_to '納得済', discussion_path(discussion), class: 'btn btn-outline-danger btn-sm mb-1 ml-2', style: 'font-size: 5px;' %>
             <% end %>
-            <div class="ml-2 mt-2">
-                <div class="text-muted" style="font-size: 12px;">投稿者：<%= link_to discussion.user.name, user_path(discussion.user) %>【<%= discussion.user.job %>・<%= discussion.user.age %>歳・<%= discussion.user.sex %>】</div>
-                <div class="text-muted" style="font-size: 12px;">作成日時：<%= discussion.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-                <div>
-                    <%= link_to discussion, class: 'mr-3' do %>
-                        <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
-                    <% end %>
-                    <% if discussion.user == current_user %>
-                        <%= link_to discussion, method: :delete, data: { confirm: "SyaberuBaを削除しますか?" }, class: 'mr-3' do %>
-                            <i class="fas fa-trash" style="color: #B4DAED;"></i>
-                        <% end %>
-                    <% end %>
-                </div>
-            </div>
+            <% if discussion.user == current_user %>
+              <% if discussion.assent == nil %>
+                <%= link_to '納得する！', edit_discussion_path(discussion), class: 'btn btn-outline-secondary btn-sm mb-1 ml-2', style: 'font-size: 5px;' %>
+              <% end %>
+            <% end %>
+          </h6>
         </div>
+        <% if current_page?(root_url) || current_page?(discussion.user) %>
+          <div class="mr-3 ml-3">
+            <p style="font-size: 13px; text-align: justify; line-height: 1.5;"><%= discussion.content.truncate(144) %></p>
+          </div>
+        <% else %>
+          <div class="ml-3">
+            <p><%= simple_format(discussion.content, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
+          </div>
+        <% end %>
+        <% if current_page?(discussion) %>
+          <% unless discussion.assent_comment == nil %>
+            <div class="mt-2 ml-3 border-top">
+              <h6 class="mt-2"><strong style="color: #5B5B5B;">納得コメント</strong></h6>
+              <p><%= simple_format(discussion.assent_comment, class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5;") %></p>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="ml-2 mt-2">
+          <div class="text-muted" style="font-size: 12px;">投稿者：<%= link_to discussion.user.name, user_path(discussion.user) %>【<%= discussion.user.job %>・<%= discussion.user.age %>歳・<%= discussion.user.sex %>】</div>
+          <div class="text-muted" style="font-size: 12px;">作成日時：<%= discussion.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+          <div>
+            <%= link_to discussion, class: 'mr-3' do %>
+              <i class="fas fa-comments" style="color: #B4DAED;"></i><span class="badge badge-light ml-1"><%= discussion.comments.count %></span>
+            <% end %>
+            <% if discussion.user == current_user %>
+              <%= link_to discussion, method: :delete, data: { confirm: "SyaberuBaを削除しますか?" }, class: 'mr-3' do %>
+                <i class="fas fa-trash" style="color: #B4DAED;"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 <% end %>
 <div class="offset-1 col-10">
-    <%= paginate discussions, param_name: 'discussion_page' %>
+  <%= paginate discussions, param_name: 'discussion_page' %>
 </div>
