@@ -21,8 +21,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @discussions = @user.discussions.page(params[:discussion_page]).per(3)
-    @comments = @user.comments.page(params[:comment_page]).per(3)
+    @discussions = @user.discussions.order(id: :desc).page(params[:discussion_page]).per(3)
+    @comments = @user.comments.order(id: :desc).page(params[:comment_page]).per(3)
     def find_comment_id
       @user.comments.each do |comment|
         comment_id = []
