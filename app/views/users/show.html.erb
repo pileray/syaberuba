@@ -3,9 +3,9 @@
     <div class="card">
       <div class="card-body">
         <% if @user.image? %>
-          <%= image_tag @user.image.to_s, class: 'rounded img-fluid', size: 500 %>
+          <%= image_tag @user.image.to_s, class: 'border rounded-circle mx-auto d-block', style: 'object-fit: cover;', size: 250 %>
         <% else %>
-          <%= image_tag 'avatar.jpeg', class: 'rounded img-fluid', size: 500 %>
+          <%= image_tag 'avatar.jpeg', class: 'border rounded-circle text-center mx-auto d-block', size: 250 %>
         <% end %>
         <div style="font-size: 13px; color: #5B5B5B;" class="mt-3 pb-2 border-bottom">
           <div>SyaberuBa数：<strong style="font-size: 15px;"><%= @user.discussions.count %></strong>　/　発言数：<strong style="font-size: 15px;"><%= @user.comments.count %></strong></div>

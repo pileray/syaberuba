@@ -6,7 +6,7 @@
   <% end %>
       <div class="media mb-3 mt-3 shadow-sm pt-3 pb-3 pr-5 pl-3 rounded border" style="background-color: #fff9f9;">
         <% if comment.user.image? %>
-          <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag comment.user.image.to_s, class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
+          <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag comment.user.image.to_s, class: 'border rounded-circle mr-3', size: 40, style: 'object-fit: cover;', alt: 'プロフィールイメージ' %></a>
         <% else %>
           <a href="<%= user_path(comment.user) %>" class="align-self-center" ><%= image_tag 'avatar.jpeg', class: 'border rounded-circle mr-3', size: 40, alt: 'プロフィールイメージ' %></a>
         <% end %>
