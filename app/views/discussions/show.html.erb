@@ -2,7 +2,7 @@
   <% if @discussion.first.assent == nil %>
     <%= link_to 'このSyaberuBaに発言する！', comment_discussion_path(@discussion.first), class: 'btn btn-primary btn-lg offset-sm-1 col-sm-10 mt-2 mb-2 rounded-pill' %>
   <% end %>
-  <div class="offset-lg-1 col-lg-10 mt-2">
+  <div class="col-lg-12 mt-2">
     <%= render 'discussions/discussions', discussions: @discussion %>
   </div>
   <%= render 'comments/comments', comments: @comments %>
