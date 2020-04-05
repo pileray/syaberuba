@@ -1,5 +1,6 @@
 class DiscussionsController < ApplicationController
   before_action :require_user_logged_in, only: [ :new, :create, :edit, :update, :destroy, :comment ]
+  before_action :correnct_user, only: [ :edit, :update, :destroy]
   
   def index
     @discussions = Discussion.all.order(id: :desc).page(params[:discussion_page]).per(9)
@@ -27,11 +28,9 @@ class DiscussionsController < ApplicationController
 
   def edit
     @show_discussion = Discussion.where(id: params[:id]).page(params[:discussion_page])
-    @discussion = Discussion.find_by(id: params[:id])
   end
 
   def update
-    @discussion = Discussion.find_by(id: params[:id])
     if @discussion.update( discussion_params )
       @discussion.update( assent: 1 )
       flash[:success] = 'SyaberuBaに納得しました！'
@@ -43,12 +42,11 @@ class DiscussionsController < ApplicationController
   end
 
   def destroy
-    @discussion = current_user.discussions.find_by(id: params[:id])
-    if !!@discussion
-      @discussion.destroy
+    if @discussion.destroy
       flash[:success] = 'SyaberuBaを削除しました。'
       redirect_to root_url
     else
+      flash.now[:danger] = 'SyaberuBaを削除に失敗しました。'
       redirect_to root_url
     end
   end
@@ -63,5 +61,13 @@ class DiscussionsController < ApplicationController
   def discussion_params
     params.require(:discussion).permit( :title, :content, :assent_comment )
   end
+  
+  def correnct_user
+    @discussion = current_user.discussions.find_by(id: params[:id])
+    unless @discussion
+      redirect_to root_url
+    end
+  end
+    
   
 end
