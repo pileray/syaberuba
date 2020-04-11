@@ -8,7 +8,7 @@ unless Rails.env.development? || Rails.env.test?
       region: 'us-east-1'
     }
 
-    config.fog_directory  = 'syaberuba'
+    config.fog_directory  = 'syaberuba2'
     config.cache_storage = :fog
   end
 end

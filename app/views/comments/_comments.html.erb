@@ -16,7 +16,7 @@
             <% if current_page?(comment.user) %>
               <p style="font-size: 13px; text-align: justify; line-height: 1.5; word-break: break-all;"><%= comment.opinion.truncate(144) %></p>
             <% else %>
-              <p><%= simple_format( h(comment.opinion), class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5; word-break: break-all;") %></p>
+              <p><%= simple_format( h(comment.opinion), style: "font-size: 14px; text-align: justify; line-height: 1.5; word-break: break-all;") %></p>
             <% end %>
           </div>
           <div class="border-top pt-2">
@@ -24,7 +24,7 @@
             <% if current_page?(comment.user) %>
               <p style="font-size: 13px; text-align: justify; line-height: 1.5; word-break: break-all;"><%= comment.learning.truncate(144) %></p>
             <% else %>
-              <p><%= simple_format( h(comment.learning), class: 'show-string', style: "font-size: 14px; text-align: justify; line-height: 1.5; word-break: break-all;") %></p>
+              <p><%= simple_format( h(comment.learning), style: "font-size: 14px; text-align: justify; line-height: 1.5; word-break: break-all;") %></p>
             <% end %>
           </div>
           <div class="ml-2 mt-2">
